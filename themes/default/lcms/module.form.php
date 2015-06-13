@@ -29,6 +29,7 @@ $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
             <th><label for="access"><?php echo Flux::message('LcmsNAccess') ?></label></th>
             <td>
                 <select name="access" id="access">
+                    <option value="<?php echo AccountLevel::UNAUTH ?>" <?php echo $disabled ?> <?php echo ($content_res->access == AccountLevel::UNAUTH) ? "selected" : "" ; ?>><?php echo AccountLevel::getGroupName(AccountLevel::UNAUTH) ?></option>
                     <?php foreach (AccountLevel::getArray() as $key => $group): ?>
                     <option value="<?php echo $key ?>" <?php echo $disabled ?> <?php echo ($content_res->access == $key) ? "selected" : "" ; ?>><?php echo $group['name'] ?></option>
                     <?php endforeach; ?>

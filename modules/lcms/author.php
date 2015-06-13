@@ -13,8 +13,10 @@ if ($session->account->group_id == AccountLevel::ADMIN) {
 }
 
 $access = $session->account->group_id;
-if (!is_null($author) && $author->access < AccountLevel::ADMIN) {
-    $acces = $author->access;
+if ($author) {
+    if ($author->access < AccountLevel::ADMIN) {
+        $acces = $author->access;
+    }
 }
 $author_level = Flux::config('LcmsCreateAuthorMinLevel');
 ?>

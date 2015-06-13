@@ -24,7 +24,7 @@ switch ($type) {
         $content_res = $lcms->getAuthor($content_id);
         break;
 }
-if (is_null($content_res)) {
+if (!$content_res) {
     $content_res = new Lcms_DAO(null, null, $type, $session);
 }
 

@@ -3,6 +3,7 @@ Current 1.0b
 1.0b release :
 - Finish base code
 - Test the addon more or less thoroughly
+- Handle installation errors & messages
 
 
 1.0 release :

@@ -73,30 +73,9 @@ class Lcms_Functions {
         if (!is_null($access)) {
             $bind[] = intval($access);
             $sqlpartial = "WHERE access <= ?";
-            //$sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
-            //$sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
-        }
-
-        /*$author_tbl = Flux::config('FluxTables.lcms_author');
-        $server = $this->server;
-        $tableName = "$server->loginDatabase.$author_tbl";
-
-        $bind = array();
-        $sqlpartial = "";
-        if ($author != null) {
-            $bind[] = intval($author->account_id);
-            $sqlpartial = "WHERE account_id = ?";
         }
         
-        if (!is_null($access)) {
-            $bind[] = intval($access);
-            if ($sqlpartial != "") {
-                $sqlpartial = $sqlpartial .= "AND access <= ?";
-            } else {
-                $sqlpartial = "WHERE access <= ?";
-            }    
-        }*/
-        
+        $cols = "$tableName.account_id, $tableName.access";
         $sth = null;
         if (!is_null($template)) {
             $sth = $server->connection->getStatement("SELECT COUNT(account_id) AS total FROM $tableName $sqlpartial");
@@ -106,11 +85,11 @@ class Lcms_Functions {
             $this->paginator = $template->getPaginator($sth->fetch()->total);
             $this->paginator->setSortableColumns(array('account_id' => 'asc', 'access'));
 
-            $sql  = $this->paginator->getSQL("SELECT * FROM $tableName $sqlpartial");
+            $sql  = $this->paginator->getSQL("SELECT $cols FROM $tableName $sqlpartial");
             $sth  = $server->connection->getStatement($sql);
             $sth->execute($bind);
         } else {
-            $sql = "SELECT * FROM $tableName $sqlpartial";
+            $sql = "SELECT $cols FROM $tableName $sqlpartial";
             $sth = $server->connection->getStatement($sql);
             $sth->execute($bind);
         }
@@ -123,9 +102,10 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.$author_tbl";
 
+        $cols = "$tableName.account_id, $tableName.access";
         $bind = array($account_id);
         $sqlpartial = "WHERE account_id = ?";
-        $sql = "SELECT * FROM $tableName $sqlpartial";
+        $sql = "SELECT $cols FROM $tableName $sqlpartial";
         $sth = $this->server->connection->getStatement($sql);
         $sth->execute($bind);
 
@@ -230,6 +210,7 @@ class Lcms_Functions {
             }
         }
         
+        $cols = "$tableName.id, $tableName.account_id, $tableName.access, $tableName.name";
         $sth = null;
         if (!is_null($template)) {
             $sth = $server->connection->getStatement("SELECT COUNT(id) AS total FROM $tableName $sqlpartial");
@@ -239,60 +220,16 @@ class Lcms_Functions {
             $this->paginator = $template->getPaginator($sth->fetch()->total);
             $this->paginator->setSortableColumns(array('id' => 'asc', 'access', 'name'));
 
-            $sql  = $this->paginator->getSQL("SELECT * FROM $tableName $sqlpartial");
+            $sql  = $this->paginator->getSQL("SELECT $cols FROM $tableName $sqlpartial");
             $sth  = $server->connection->getStatement($sql);
             $sth->execute($bind);
         } else {
-            $sql = "SELECT * FROM $tableName $sqlpartial";
+            $sql = "SELECT $cols FROM $tableName $sqlpartial";
             $sth = $server->connection->getStatement($sql);
             $sth->execute($bind);
         }
 
         return $sth->fetchAll();
-        
-        
-        
-        
-        
-        /*$module_tbl = Flux::config('FluxTables.lcms_module');
-        $server = $this->server;
-        $tableName = "$server->loginDatabase.$module_tbl";
-
-        $bind = array();
-        $sqlpartial = "";
-        if ($author != null) {
-            $bind[] = intval($author->account_id);
-            $sqlpartial = "WHERE account_id = ?";
-        }
-        
-        if (!is_null($access)) {
-            $bind[] = intval($access);
-            if ($sqlpartial != "") {
-                $sqlpartial = $sqlpartial .= "AND access <= ?";
-            } else {
-                $sqlpartial = "WHERE access <= ?";
-            }    
-        }
-        
-        $sth = null;
-        if (!is_null($template)) {
-            $sth = $server->connection->getStatement("SELECT COUNT(id) AS total FROM $tableName $sqlpartial");
-            $sth->execute($bind);
-
-            Flux::config('ResultsPerPage', Flux::config('LcmsModulesPerPage'));
-            $this->paginator = $template->getPaginator($sth->fetch()->total);
-            $this->paginator->setSortableColumns(array('id' => 'asc', 'access', 'name'));
-
-            $sql  = $this->paginator->getSQL("SELECT * FROM $tableName $sqlpartial");
-            $sth  = $server->connection->getStatement($sql);
-            $sth->execute($bind);
-        } else {
-            $sql = "SELECT * FROM $tableName $sqlpartial";
-            $sth = $server->connection->getStatement($sql);
-            $sth->execute($bind);
-        }
-        
-        return $sth->fetchAll();*/
     }
     
     
@@ -302,9 +239,10 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.$module_tbl";
 
+        $cols = "$tableName.id, $tableName.account_id, $tableName.access, $tableName.name";
         $bind = array($module_id);
         $sqlpartial = "WHERE id = ?";
-        $sql = "SELECT * FROM $tableName $sqlpartial";
+        $sql = "SELECT $cols FROM $tableName $sqlpartial";
         $sth = $this->server->connection->getStatement($sql);
         $sth->execute($bind);
 
@@ -414,6 +352,7 @@ class Lcms_Functions {
             }
         }
         
+        $cols = "$tableName.id, $tableName.module_id, $tableName.account_id, $tableName.status, $tableName.access, $tableName.date, $tableName.name, $tableName.content";
         $sth = null;
         if (!is_null($template)) {
             $sth = $server->connection->getStatement("SELECT COUNT(id) AS total FROM $tableName $sqlpartial");
@@ -423,11 +362,11 @@ class Lcms_Functions {
             $this->paginator = $template->getPaginator($sth->fetch()->total);
             $this->paginator->setSortableColumns(array('id' => 'asc', 'access', 'date', 'name', 'status'));
 
-            $sql  = $this->paginator->getSQL("SELECT * FROM $tableName $sqlpartial");
+            $sql  = $this->paginator->getSQL("SELECT $cols FROM $tableName $sqlpartial");
             $sth  = $server->connection->getStatement($sql);
             $sth->execute($bind);
         } else {
-            $sql = "SELECT * FROM $tableName $sqlpartial";
+            $sql = "SELECT $cols FROM $tableName $sqlpartial";
             $sth = $this->server->connection->getStatement($sql);
             $sth->execute($bind);
         }
@@ -440,9 +379,10 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.$page_tbl";
 
+        $cols = "$tableName.id, $tableName.module_id, $tableName.account_id, $tableName.status, $tableName.access, $tableName.date, $tableName.name, $tableName.content";
         $bind = array($page_id);
         $sqlpartial = "WHERE id = ?";
-        $sql = "SELECT * FROM $tableName $sqlpartial";
+        $sql = "SELECT $cols FROM $tableName $sqlpartial";
         $sth = $this->server->connection->getStatement($sql);
         $sth->execute($bind);
 
