@@ -1,0 +1,36 @@
+Current 1.0b
+
+1.0b release :
+- Finish base code
+- Test the addon more or less thoroughly
+
+
+1.0 release :
+- Improve performances
+    - Reduce/improve sql queries if possible without too much hassle
+    - Add queries to retrieve single rows instead of looping through the whole lists
+- Improve general code
+    - MVC pattern
+    - Consistency 
+- Work on the CSS conflict between CKEditor and FluxCP (It seems to work more or less as it)
+- Improve form content validation and feedback in a more user-friendly way
+- Improve interface
+    - No delete button if item cannot be deleted
+- Write a better Readme
+
+
+1.1 release :
+- Add more options
+    - Choose modules/FluxCP-menus priority in FluxCP menu
+    - Choose pages priority in the module
+- Handle menus and pages more efficiently
+- Improve interface general comfort
+    - Multiple selection for deletion/validation
+    - Search dropdown box for selects with a lot of content
+    - Add icons
+    - Etc
+- Add Smart URL support
+
+1.2 release :
+- Add custom code snippets to retrieve data from Hercules/FluxCP and return them as widgets
+- ...
