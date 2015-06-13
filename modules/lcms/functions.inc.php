@@ -195,10 +195,14 @@ class Lcms_Functions {
 
         $bind = array();
         $sqlpartial = "";
-        if (!is_null($access) && is_null($author)) {
+        if (!is_null($access)) {
             $bind[] = intval($access);
-            $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
-            $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
+            if (is_null($author)) {
+                $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
+                $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
+            } else {
+                $sqlpartial = "WHERE access <= ?";
+            }
         }
         
         if ($author != null) {
@@ -330,10 +334,14 @@ class Lcms_Functions {
 
         $bind = array();
         $sqlpartial = "";
-        if (!is_null($access) && is_null($module)) {
+        if (!is_null($access)) {
             $bind[] = intval($access);
-            $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
-            $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
+            if (is_null($module) || is_null($author)) {
+                $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
+                $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
+            } else {
+                $sqlpartial = "WHERE access <= ?";
+            }
         }
         
         if ($module != null) {
@@ -482,7 +490,8 @@ class Lcms_Functions {
 
         if (count($module_res) !== 0) {
             foreach ($module_res as $module) {
-                $page_res = $this->getModulePages($module, $this->session->account->group_id);
+                $group_id = (!is_null($this->session->account->group_id)) ? $this->session->account->group_id : AccountLevel::UNAUTH;
+                $page_res = $this->getModulePages($module, $group_id);
 
                 if (count($page_res) !== 0) {
                     foreach ($page_res as $page) {
