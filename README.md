@@ -54,7 +54,7 @@ Features :
 
 
 How to install :
-1. Copy the lcms base directory into the FluxCP/addons directory
+1. Copy the "FluxCP-LCMS-master" directory from the archive into the FluxCP/addons directory and rename it to "lcms"
 
 2. Execute FluxCP/addons/lcms/sql/install.sql into your Hercules/FluxCP sql database
 
@@ -154,4 +154,3 @@ How to use :
    i.e : A high-gm on LCMS (access=2) will be able to manage his own content and users below his level content (0=normal and 1=low-gm).
    Note: Only an administrator on Hercules/FluxCP side will be able to manage LCMS "admins" and their content.
    So basically, every author is also a moderator starting from low-gm (access=1).
-
