@@ -11,8 +11,8 @@ return array(
                         'delete.form'   => AccountLevel::NORMAL,
                         // LCMS content moderation page
                         'page'          => AccountLevel::LOWGM,   // Minimum level required to see the "Manage pages" menu
-                        'module'        => AccountLevel::LOWGM,   // Minimum level required to see the "Manage modules" menu
-                        'author'        => AccountLevel::HIGHGM,   // Minimum level required to see the "Manage authors" menu
+                        'module'        => AccountLevel::ADMIN,   // Minimum level required to see the "Manage modules" menu
+                        'author'        => AccountLevel::ADMIN,   // Minimum level required to see the "Manage authors" menu
 		)
 	)
 )

@@ -6,7 +6,7 @@ return array(
         'LcmsAuthorsPerPage'          => 10,                    // Max displayed authors per page
         'LcmsCreatePageMinLevel'      => AccountLevel::NORMAL,  // Minimum LCMS AccountLevel to create pages
         'LcmsCreateModuleMinLevel'    => AccountLevel::HIGHGM,  // Minimum LCMS AccountLevel to create modules
-        'LcmsCreateAuthorMinLevel'    => AccountLevel::HIGHGM,   // Minimum LCMS AccountLevel to create authors
+        'LcmsCreateAuthorMinLevel'    => AccountLevel::ADMIN,   // Minimum LCMS AccountLevel to create authors
         'LcmsValidationEnable'        => true,                  // If true, any content posted by users below BypassValidationLevel level will require validation from an higher level user
         'LcmsValidationBypassLevel'   => AccountLevel::LOWGM,   // If EnableContentValidation=true, defines the access level needed to bypass validation
         // Important note : LCMS permissions (access) use the same permission pattern as Hercules/FluxCP (group_id)
