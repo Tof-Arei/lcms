@@ -50,7 +50,7 @@
         </tr>
     <?php endforeach; ?>
     <?php endif ?>
-    <?php if ($page_level <= $author->access): ?>    
+    <?php if ($page_level <= $author->access && ($module_res != null)): ?>    
         <tr>
             <td colspan="9">
                 <?php echo Flux::message('LcmsMesOptions') ?>
