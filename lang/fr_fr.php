@@ -6,6 +6,7 @@ return array(
         'LcmsMCHeading'           => 'Gérez tout le contenu Light CMS',
         'LcmsMCHeading2'          => 'Modules et pages :',
         'LcmsMCHeading3'          => 'Auteurs :',
+        'LcmsShowTitle'           => '%s',
     
         // LCMS noms/attributs communs
         'LcmsNSelect'             => 'Séléction',

@@ -77,6 +77,9 @@ $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
                 <textarea class="ckeditor" name="content" id="content" <?php echo $disabled ?>>
                     <?php echo htmlspecialchars($content_res->content) ?>
                 </textarea>
+                <script type="text/javascript">
+                    CKEDITOR.config.contentsCss = '<?php echo $this->themePath('css/flux.css') ?>';
+                </script>
             </td>
             <td><p></p></td>
         </tr>

@@ -1,6 +1,7 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <?php if (!empty($errorMessage)): ?>
     <p class="red"><?php echo htmlspecialchars($errorMessage) ?></p>
+    <?php exit; ?>
 <?php endif; ?>
 <?php if (!is_null($page)): ?>
     <?php if (!is_null($page_res)): ?>

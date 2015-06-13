@@ -6,6 +6,7 @@ return array(
         'LcmsMCHeading'           => 'Manage all Light CMS content',
         'LcmsMCHeading2'          => 'Modules and pages :',
         'LcmsMCHeading3'          => 'Authors :',
+        'LcmsShowTitle'           => '%s',
     
         // LCMS common/data names
         'LcmsNSelect'             => 'Select',

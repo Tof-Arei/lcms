@@ -47,7 +47,8 @@ Features :
 - HTML parser (HTMLPurifier)
 - Author system with simple permissions
 - Simple content moderation/validation system
-- Fully translatable, comes with a free (untested) french translation
+- No manual files edit besides addon installation
+- (Almost) fully translatable, comes with a free (untested) french translation
 
 
 How to install :

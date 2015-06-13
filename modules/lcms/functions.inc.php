@@ -324,7 +324,7 @@ class Lcms_Functions {
         }
         return $validation;
     }
-
+    
     public function getAuthorAuthors($author, $access = null) {
         return $this->getAuthors($author, $access);
     }
