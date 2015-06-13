@@ -59,20 +59,36 @@ class Lcms_Functions {
         return !is_null($account_res) ? $account_res->userid : Flux::message('LcmsMesEUnknownAuthor');
     }
     
-    public function getAuthorsPaginator($template, $access = null) {
-        return $this->getAuthors($access, $template);
+    public function getAuthorsPaginator($template, $author = null, $access = null) {
+        return $this->getAuthors($author, $access, $template);
     }
     
-    private function getAuthors($access = null, $template = null) {
+    private function getAuthors($author, $access = null, $template = null) {
         $author_tbl = Flux::config('FluxTables.lcms_author');
         $server = $this->server;
         $tableName = "$server->loginDatabase.$author_tbl";
-
+        
         $bind = array();
         $sqlpartial = "";
         if (!is_null($access)) {
             $bind[] = intval($access);
-            $sqlpartial = "WHERE access <= ?";
+            if (is_null($author)) {
+                $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
+                $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
+            } else {
+                $sqlpartial = "WHERE access <= ?";
+            }
+        }
+        
+        if ($author != null) {
+            if (is_null($access)) {
+                $bind[] = intval($author->account_id);
+                if ($sqlpartial != "") {
+                    $sqlpartial .= "AND $tableName.account_id = ?";
+                } else {
+                    $sqlpartial .= "WHERE account_id = ?";
+                }
+            }
         }
         
         $cols = "$tableName.account_id, $tableName.access";
@@ -206,11 +222,13 @@ class Lcms_Functions {
         }
         
         if ($author != null) {
-            $bind[] = intval($author->account_id);
-            if ($sqlpartial != "") {
-                $sqlpartial .= "AND $tableName.account_id = ?";
-            } else {
-                $sqlpartial .= "WHERE account_id = ?";
+            if (is_null($access)) {
+                $bind[] = intval($author->account_id);
+                if ($sqlpartial != "") {
+                    $sqlpartial .= "AND $tableName.account_id = ?";
+                } else {
+                    $sqlpartial .= "WHERE account_id = ?";
+                }
             }
         }
         
@@ -308,7 +326,7 @@ class Lcms_Functions {
     }
 
     public function getAuthorAuthors($author, $access = null) {
-        return $this->getAuthors($access);
+        return $this->getAuthors($author, $access);
     }
     
     public function getAuthorModules($author, $access = null) {
@@ -336,7 +354,7 @@ class Lcms_Functions {
         $sqlpartial = "";
         if (!is_null($access)) {
             $bind[] = intval($access);
-            if (is_null($module) || is_null($author)) {
+            if (!is_null($author)) {
                 $sqlpartial = "INNER JOIN $server->loginDatabase.cp_lcms_author ON $server->loginDatabase.cp_lcms_author.account_id = $tableName.account_id";
                 $sqlpartial .= " WHERE $server->loginDatabase.cp_lcms_author.access <= ?";
             } else {
@@ -352,11 +370,13 @@ class Lcms_Functions {
                 $sqlpartial .= "WHERE module_id = ?";
             }
         } else if ($author != null) {
-            $bind[] = intval($author->account_id);
-            if ($sqlpartial != "") {
-                $sqlpartial .= "AND $tableName.account_id = ?";
-            } else {
-                $sqlpartial .= "WHERE account_id = ?";
+            if (is_null($access)) {
+                $bind[] = intval($author->account_id);
+                if ($sqlpartial != "") {
+                    $sqlpartial .= "AND $tableName.account_id = ?";
+                } else {
+                    $sqlpartial .= "WHERE account_id = ?";
+                }
             }
         }
         

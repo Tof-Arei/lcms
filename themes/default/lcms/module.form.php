@@ -15,7 +15,7 @@ $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
             <th><label for="account_id"><?php echo Flux::message('LcmsTypeAuthor') ?></label></th>
             <td>
                 <select name="account_id" id="account_id">
-                    <?php $author_res = $lcms->getAuthorAuthors($author) ?>
+                    <?php $author_res = $lcms->getAuthorAuthors($author, $author->access) ?>
                     <?php if (count($author_res) !== 0): ?>
                     <?php foreach ($author_res as $author_field): ?>
                     <option value="<?php echo $author_field->account_id ?>" <?php echo ($content_res->account_id != $author_field->account_id) ? (is_null($author)) ? '' : 'readOnly="readonly"' : "selected" ?>><?php echo $lcms->getAuthorName($author_field->account_id) ?></option>

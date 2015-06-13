@@ -9,7 +9,7 @@ $author_res = null;
 if ($session->account->group_id == AccountLevel::ADMIN) {
     $author_res = $lcms->getAuthorsPaginator($this);
 } else {
-    $author_res = $lcms->getAuthorsPaginator($this, $author->access);
+    $author_res = $lcms->getAuthorsPaginator($this, $author, $author->access);
 }
 
 $access = $session->account->group_id;

@@ -1,12 +1,11 @@
 Current 1.0b
 
 1.0b release :
-- Finish base code
 - Test the addon more or less thoroughly
-- Handle installation errors & messages
 
 
 1.0 release :
+- Fix the query clusterfuck
 - Improve performances
     - Reduce/improve sql queries if possible without too much hassle
     - Add queries to retrieve single rows instead of looping through the whole lists
@@ -18,6 +17,7 @@ Current 1.0b
 - Improve interface
     - No delete button if item cannot be deleted
 - Write a better Readme
+- Handle installation errors & messages
 
 
 1.1 release :
@@ -32,6 +32,7 @@ Current 1.0b
     - Etc
 - Add Smart URL support
 
+
 1.2 release :
-- Add custom code snippets to retrieve data from Hercules/FluxCP and return them as widgets
+- Add custom code snippets to retrieve data from Hercules/FluxCP and display it within content
 - ...
