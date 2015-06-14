@@ -1,8 +1,5 @@
 Current 1.0b
 
-1.0b release :
-- Test the addon more or less thoroughly
-
 
 1.0 release :
 - Fix the query clusterfuck
@@ -13,10 +10,10 @@ Current 1.0b
 - Improve general code
     - MVC pattern
     - Consistency 
-- Work on the CSS conflict between CKEditor and FluxCP (It seems to work more or less as it)
 - Improve form content validation and feedback in a more user-friendly way
 - Improve interface
     - No delete button if item cannot be deleted
+- Add cleanURL support
 - Write a better Readme
 - Handle installation errors & messages
 
@@ -31,7 +28,6 @@ Current 1.0b
     - Search dropdown box for selects with a lot of content
     - Add icons
     - Etc
-- Add Smart URL support
 
 
 1.2 release :
