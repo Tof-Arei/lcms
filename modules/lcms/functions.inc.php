@@ -530,7 +530,13 @@ class Lcms_Functions {
                         if (empty($allowedItems[$module->name])) {
                                 $allowedItems[$module->name] = array();
                         }
-                        if (Flux::config('LcmsValidationEnable') && $page->status != Lcms_Functions::$PAGE_STATUS_PENDING) {
+                        $display = true;
+                        if (Flux::config('LcmsValidationEnable')) {
+                            if ($page->status != Lcms_Functions::$PAGE_STATUS_VALID) {
+                                $display = false;
+                            }
+                        }
+                        if ($display) {
                             $allowedItems[$module->name][] = array(
                                     'name'   => $page->name,
                                     'exturl' => null,
