@@ -1,8 +1,6 @@
 # FluxCP-LCMS
 Light Content Management System for Hercules FluxCP by Arei
 
-Light CMS by Arei
-
 Version : 1.0b
 
 Changelog :
