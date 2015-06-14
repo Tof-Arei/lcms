@@ -13,7 +13,7 @@ Thanks to/Credits :
 - Feefty for his invaluable help through his support addon.
 - The CKEditor and HTMLPurifier developers.
 - La Semeuse coffee brand and my expresso machine.
-- My snakes and neighbors for putting up with me cursing PHP countless times
+- My snakes and neighbors for putting up with me cursing PHP/myself countless times
 - And YOU for using this addon!
 
 
