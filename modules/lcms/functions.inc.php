@@ -40,7 +40,11 @@ class Lcms_Functions {
     
     public function getHerculesGroupName($group_id) {
         $groups = AccountLevel::getArray();
-        return $groups[$group_id]['name'];
+        if ($group_id >= 0) {
+            return $groups[$group_id]['name'];
+        } else {
+            return "N/A";
+        }
     }
     
     public function getAuthorName($account_id) {
