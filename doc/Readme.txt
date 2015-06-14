@@ -96,6 +96,7 @@ How to uninstall :
 
 2. Execute FluxCP/addons/lcms/sql/uninstall.sql into your Hercules/FluxCP sql database
 
+3. Restore FluxCP files modified by installation steps 3, 4 and 5
 
 How to use :
 1. Install the addon. That will add the Light CMS management menu.
