@@ -52,7 +52,7 @@ Features :
 
 
 How to install :
-1. Copy the "FluxCP-LCMS-master" directory from the archive into the FluxCP/addons directory and rename it to "lcms"
+1. Copy the "lcms" base directory from the archive into the FluxCP/addons directory
 
 2. Execute FluxCP/addons/lcms/sql/install.sql into your Hercules/FluxCP sql database
 
