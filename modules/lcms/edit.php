@@ -8,10 +8,8 @@ $tsk = (String) $param[1];
 $content_id = (int) $param[2];
 
 $lcms = new Lcms_Functions($session);
-// Bypass author access filter if the current user is an Hercules/FluxCP Admin
-// (Allows the Hercules/FluxCP admin to *actually* manage LCMS admins' stuff)
-//$author = ($session->account->group_id != AccountLevel::ADMIN) ? $lcms->getAuthor($session->account->account_id) : null;
 $author = $lcms->getAuthor($session->account->account_id);
+$group_id = $session->account->group_id;
 
 switch ($type) {
     case "module" :

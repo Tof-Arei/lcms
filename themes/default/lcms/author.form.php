@@ -4,7 +4,7 @@ $this->loginRequired();
 $readonly = ($tsk == "add" || $tsk == "update") ? '' : 'readOnly="readonly"';
 $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
 
-$account_res = $lcms->getAccounts();
+$account_res = $lcms->getAccounts($group_id);
 ?>
 <form action="<?php echo $this->url('lcms', "edit") ?>" method="post" class="generic-form">
     <table class="generic-form-table">
@@ -26,7 +26,7 @@ $account_res = $lcms->getAccounts();
             <td>
                 <select name="access" id="access">
                     <?php foreach (AccountLevel::getArray() as $key => $group): ?>
-                    <option value="<?php echo $key ?>" <?php echo $disabled ?> <?php echo ($content_res->access == $key) ? "selected" : "" ; ?>><?php echo $group['name'] ?></option>
+                    <option value="<?php echo $key ?>" <?php echo ($key <= $group_id) ? $disabled : "disabled" ?> <?php echo ($content_res->access == $key) ? "selected" : "" ; ?>><?php echo $group['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </td>

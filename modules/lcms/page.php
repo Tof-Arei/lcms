@@ -12,7 +12,7 @@ if ($session->account->group_id == AccountLevel::ADMIN) {
     $module_res = $lcms->getAuthorModules(null);
 } else {
     $page_res = $lcms->getPagesPaginator($this, null, $author, $author->access);
-    $module_res = $lcms->getAuthorModules(null, $author->access);
+    $module_res = $lcms->getAuthorModules($author, $author->access);
 }
 
 $page_level = Flux::config('LcmsCreatePageMinLevel');

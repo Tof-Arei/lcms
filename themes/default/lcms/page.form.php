@@ -15,7 +15,7 @@ $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
             <th><label for="module_id"><?php echo Flux::message('LcmsTypeModule') ?></label></th>
             <td>
                 <select name="module_id" id="module_id">
-                    <?php $module_res = $lcms->getAuthorModules(null, $author->access) ?>
+                    <?php $module_res = $lcms->getAuthorModules($author, $author->access) ?>
                     <?php if (count($module_res) !== 0): ?>
                     <?php foreach ($module_res as $module_field): ?>
                     <option value="<?php echo $module_field->id ?>" <?php echo $disabled ?> <?php echo ($content_res->module_id == $module_field->id) ? "selected" : "" ; ?>><?php echo $module_field->name ?></option>
@@ -55,7 +55,7 @@ $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
                 <select name="access" id="access">
                     <option value="<?php echo AccountLevel::UNAUTH ?>" <?php echo $disabled ?> <?php echo ($content_res->access == AccountLevel::UNAUTH) ? "selected" : "" ; ?>><?php echo AccountLevel::getGroupName(AccountLevel::UNAUTH) ?></option>
                     <?php foreach (AccountLevel::getArray() as $key => $group): ?>
-                    <option value="<?php echo $key ?>" <?php echo $disabled ?> <?php echo ($content_res->access == $key) ? "selected" : "" ; ?>><?php echo $group['name'] ?></option>
+                    <option value="<?php echo $key ?>" <?php echo ($key <= $group_id) ? $disabled : "disabled" ?> <?php echo ($content_res->access == $key) ? "selected" : "" ; ?>><?php echo $group['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </td>

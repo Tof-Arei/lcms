@@ -24,14 +24,19 @@ class Lcms_Functions {
         self::$PAGE_STATUS[self::$PAGE_STATUS_VALID] = Flux::message('LcmsStatValid');
     }
     
-    public function getAccounts() {
+    public function getAccounts($access = null) {
         $account_tbl = 'login';
         $server = $this->server;
         $tableName = "$server->loginDatabase.$account_tbl";
 
-        $cols = "account_id, user_id";
+        $cols = "account_id, group_id, userid";
         $bind = array();
-        $sql = "SELECT $cols FROM $tableName";
+        $sqlpartial = "";
+        if (!is_null($access)) {
+            $bind[] = $access;
+            $sqlpartial = "WHERE group_id <= ?";
+        }
+        $sql = "SELECT $cols FROM $tableName $sqlpartial";
         $sth = $server->connection->getStatement($sql);
         $sth->execute($bind);
         
