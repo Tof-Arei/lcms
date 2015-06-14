@@ -51,5 +51,6 @@ Features :
 - No manual files edit needed besides addon installation
 - (Almost) fully translatable, comes with a free (untested) french translation
 
+
 See doc/Readme.txt for the installation procedure.
 See doc/Todo.txt for planned updates, features and swearing
