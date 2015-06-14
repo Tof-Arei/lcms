@@ -6,6 +6,7 @@ Current 1.0b
 
 1.0 release :
 - Fix the query clusterfuck
+- Fix the permissions clusterfuck
 - Improve performances
     - Reduce/improve sql queries if possible without too much hassle
     - Add queries to retrieve single rows instead of looping through the whole lists

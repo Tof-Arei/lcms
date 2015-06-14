@@ -29,8 +29,9 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.$account_tbl";
 
+        $cols = "account_id, user_id";
         $bind = array();
-        $sql = "SELECT * FROM $tableName";
+        $sql = "SELECT $cols FROM $tableName";
         $sth = $server->connection->getStatement($sql);
         $sth->execute($bind);
         
@@ -46,8 +47,9 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.login";
         
+        $cols = "userid";
         $bind = array(intval($account_id));
-        $sql = "SELECT * FROM $tableName WHERE account_id = ?";
+        $sql = "SELECT $cols FROM $tableName WHERE account_id = ?";
         $sth = $server->connection->getStatement($sql);
         $sth->execute($bind);
         
@@ -187,8 +189,9 @@ class Lcms_Functions {
         $server = $this->server;
         $tableName = "$server->loginDatabase.$module_tbl";
         
+        $cols = "name";
         $bind = array(intval($module_id));
-        $sql = "SELECT * FROM $tableName WHERE id = ?";
+        $sql = "SELECT $cols FROM $tableName WHERE id = ?";
         $sth = $server->connection->getStatement($sql);
         $sth->execute($bind);
         

@@ -4,7 +4,7 @@ $page_id = (int) $params->get('id');
 $page = $lcms->getPage($page_id);
 $page_res = null;
 
-if (!is_null($page)) {
+if ($page) {
     if ($page->access <= $session->account->group_id) {
         $module = $lcms->getModule($page->module_id);
         $page_res = $lcms->getModulePages($module, true);
