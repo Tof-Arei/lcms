@@ -52,5 +52,5 @@ Features :
 - (Almost) fully translatable, comes with a free (untested) french translation
 
 
-See doc/Readme.txt for the installation procedure.
-See doc/Todo.txt for planned updates, features and swearing
+- See doc/Readme.txt for the installation procedure.
+- See doc/Todo.txt for planned updates, features and swearing
