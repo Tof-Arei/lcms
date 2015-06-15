@@ -4,6 +4,14 @@ $this->loginRequired();
 $readonly = ($tsk == "add" || $tsk == "update") ? '' : 'readOnly="readonly"';
 $disabled = ($readonly == null) ? '' : 'disabled="disabled"';
 ?>
+<script type="text/javascript">
+// Dynamically insert CKEditor script to current page <head> to avoid theme files edition during installation
+var head = document.getElementsByTagName('head')[0];
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '<?php echo Flux::config('BaseURI').FLUX_ADDON_DIR."/lcms/lib/ckeditor/ckeditor.js" ?>';
+head.appendChild(script);
+</script>
 <form action="<?php echo $this->url('lcms', "edit") ?>" method="post" class="generic-form">
     <table class="generic-form-table">
         <tr>

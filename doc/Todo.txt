@@ -1,15 +1,15 @@
 Current 1.0b
 
 
-1.0 release :
+1.0 initial release :
 - Fix the query clusterfuck
 - Fix the permissions clusterfuck
 - Improve performances
     - Reduce/improve sql queries if possible without too much hassle
-    - Add queries to retrieve single rows instead of looping through the whole lists
 - Improve general code
     - MVC pattern
     - Consistency 
+- Make the installation process easier (ideally, only 1 edit in FluxCP/Flux/Template.php)
 - Improve form content validation and feedback in a more user-friendly way
 - Improve interface
     - No delete button if item cannot be deleted
@@ -23,6 +23,7 @@ Current 1.0b
     - Choose modules/FluxCP-menus priority in FluxCP menu
     - Choose pages priority in the module
 - Handle menus and pages more efficiently
+    - Add a news/events systems if not possible to handle them directly within LCMS configuration
 - Improve interface general comfort
     - Multiple selection for deletion/validation
     - Search dropdown box for selects with a lot of content

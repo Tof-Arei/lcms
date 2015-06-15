@@ -4,9 +4,9 @@ return array(
         'LcmsPagesPerPage'            => 10,                    // Max displayed pages per page
         'LcmsModulesPerPage'          => 10,                    // Max displayed modules per page
         'LcmsAuthorsPerPage'          => 10,                    // Max displayed authors per page
-        'LcmsCreatePageMinLevel'      => AccountLevel::NORMAL,  // Minimum LCMS AccountLevel to create pages
-        'LcmsCreateModuleMinLevel'    => AccountLevel::HIGHGM,  // Minimum LCMS AccountLevel to create modules
-        'LcmsCreateAuthorMinLevel'    => AccountLevel::ADMIN,   // Minimum LCMS AccountLevel to create authors
+        'LcmsCreatePageMinLevel'      => AccountLevel::NORMAL,  // Minimum LCMS level to create pages
+        'LcmsCreateModuleMinLevel'    => AccountLevel::HIGHGM,  // Minimum LCMS level to create modules
+        'LcmsCreateAuthorMinLevel'    => AccountLevel::ADMIN,   // Minimum LCMS level to create authors
         'LcmsValidationEnable'        => true,                  // If true, any content posted by users below BypassValidationLevel level will require validation from an higher level user
         'LcmsValidationBypassLevel'   => AccountLevel::LOWGM,   // If EnableContentValidation=true, defines the access level needed to bypass validation
         // Important note : LCMS permissions (access) use the same permission pattern as Hercules/FluxCP (group_id)
@@ -17,7 +17,7 @@ return array(
         // LCMS libraries options
         'LcmsEnableHTMLPurifierCache' => false,                 // If true, activates HTMLPurifier cache to improve performances
                                                                 // Warning: You have to give HTMLPurifier permissions to write on your server
-                                                                // see the optional installation step 8 in Readme.txt for more informations
+                                                                // see the optional installation step 7 in Readme.txt for more informations
 
     
         // LCMS dev configuration (If you don't know what you are doing, don't do it.)

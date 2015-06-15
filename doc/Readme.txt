@@ -56,21 +56,13 @@ How to install :
 
 2. Execute FluxCP/addons/lcms/sql/install.sql into your Hercules/FluxCP sql database
 
-   (Make a backup of the 3 FluxCP main files you are about to edit!)
+   (Make a backup of the 2 FluxCP main files you are about to edit!)
 3. Open FluxCP/index.php, goto line 58, add a new line and paste the following code :
 
 // LCMS functions
 require_once FLUX_ROOT . '/' . FLUX_ADDON_DIR . '/lcms/modules/lcms/functions.inc.php';
 
-4. Open FluxCP/themes/default/header.php goto line 25, add a new line and paste the following code :
-
-                <!-- CKEditor import for Light CMS -->
-                <script type="text/javascript" src="<?php echo Flux::config('BaseURI').FLUX_ADDON_DIR."/lcms/lib/ckeditor/ckeditor.js" ?>"></script>
-
-   Note: You must add this code for EVERY theme into header.php for this addon to work (untested) with them, the line might not be exactly the same too.
-         Simply paste the code before <script type="text/javascript">
-
-5. Open FluxCP/lib/Flux/Template.php, goto line 476, add a new line and paste the following code
+4. Open FluxCP/lib/Flux/Template.php, goto line 476, add a new line and paste the following code
 
                 // Hook for LCMS dynamic menus
                 if (!$adminMenus) {
@@ -79,12 +71,12 @@ require_once FLUX_ROOT . '/' . FLUX_ADDON_DIR . '/lcms/modules/lcms/functions.in
                     $allowedItems = $lcms->getLcmsMenuItems($allowedItems, $this);
                 }
 
-6. Save the edited files and voilà!
+5. Save the edited files and voilà!
 
 (Optional)
-7. Edit values in addon.php and access.php according to your preferences
+6. Edit values in addon.php and access.php according to your preferences
 
-8. Give HTMLPurifier writing permissions to enable the cache in addon.php.
+7. Give HTMLPurifier writing permissions to enable the cache in addon.php.
    Enter the following command in a console with root permissions in FluxCP directory
 
 chown -R www-data:www-data addons/lcms/lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer

@@ -1,5 +1,7 @@
 <?php
+// HTMLPurifier import
 require_once FLUX_ROOT . '/' . FLUX_ADDON_DIR . '/lcms/lib/htmlpurifier/library/HTMLPurifier.auto.php';
+// Note: CKEditor is imported dynamically by page.form.php to avoid edition of (multiple) FluxCP/theme/<theme>/header.php
 
 /*
  * Big fat ugly class to handle LCMS specific data and avoid some code repetition

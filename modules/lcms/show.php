@@ -4,6 +4,7 @@ $page_id = (int) $params->get('id');
 $page = $lcms->getPage($page_id);
 $page_res = null;
 
+$errorMessage = null;
 if ($page) {
     $display = true;
     if (Flux::config('LcmsValidationEnable')) {
@@ -25,5 +26,8 @@ if ($page) {
     }
 } else {
     $errorMessage = Flux::message('LcmsMesE404');
+}
+if (!is_null($errorMessage)) {
+    $metaRefresh = array('seconds' => 2, 'location' => $this->basePath);
 }
 ?>
