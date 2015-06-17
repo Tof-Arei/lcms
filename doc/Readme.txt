@@ -103,7 +103,7 @@ The menu is accessible to every logged user, but they have to be given author ri
 
     $page_id = 1; // id of the existing page to hook
     $lcms = new Lcms_Functions($session);
-    echo $lcms->hookPage($page_id);
+    echo $lcms->getPageHTML($page_id);
     ?>
 
 4. Edit/delete content

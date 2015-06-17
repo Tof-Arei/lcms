@@ -597,7 +597,7 @@ class Lcms_Functions {
      * @return page content or access error
      * @todo find a proper way to handle this for 1.1
      */
-    public function hookPage($page_id) {
+    public function getPageHTML($page_id) {
         $page = $this->getPage($page_id);
         if ($page->access <= $this->session->account->account_id) {
             return $page->content;
