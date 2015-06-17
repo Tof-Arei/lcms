@@ -1,7 +1,7 @@
 1.0 initial release [Arei]:
 - General code
     - Fixed the PHP data manipulating code
-    - Better definition/separation of Hercules/FluCP permissions and LCMS permissions
+    - Better definition/separation of Hercules/FluxCP permissions and LCMS permissions
 - Improved performances
     - Joined tables to avoid extra queries to retrieve parent data
 - Improved interface

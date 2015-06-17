@@ -33,7 +33,7 @@ return array(
         'LcmsMesBackToIndex'      => 'Retour vers la page de gestion du contenu.',
         'LcmsMesWAuthor'          => 'Attention: Vous n\'êtes pas autorisé(e) à ajouter du contenu.',
         'LcmsMesWAdmin'           => 'Attention: Light CMS est installé, mais vous devez toujours vous ajouter en tant qu\'auteur(e).',
-        'LcmsMesWAdmin2'          => 'Pour vous ajouter en tant qu\'auteur(e), allez sur la page "Manage content".',
+        'LcmsMesWAdmin2'          => 'Pour vous ajouter en tant qu\'auteur(e), allez sur la page "Manage authors".',
         'LcmsMesWConfirm'         => 'Êtes-vous sûr(e) ?',
         'LcmsMesEAccess'          => 'Erreur: Vous n\'êtes pas autorisé(e) à accéder à cette page.',
         'LcmsMesE404'             => 'Erreur 404: Page inconnue.',
