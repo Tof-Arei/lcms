@@ -49,3 +49,4 @@ Features :
 More informations:
 - doc/Readme.txt for the installation procedure.
 - doc/Todo.txt for planned updates, features and swearing
+- doc/Changelog.txt for changelog and more swearing
