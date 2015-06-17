@@ -42,10 +42,11 @@ Features :
 - HTML parser (HTMLPurifier)
 - Author system with simple permissions
 - Simple content moderation/validation system
-- No manual files edit needed besides addon installation
+- No manual files edit needed besides addon installation and manual page hooking
 - (Almost) fully translatable, comes with a free (untested) french translation
 
 
 More informations:
 - doc/Readme.txt for the installation procedure.
 - doc/Todo.txt for planned updates, features and swearing
+- doc/Changelog.txt for changelog and more swearing
