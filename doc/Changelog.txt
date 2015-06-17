@@ -1,0 +1,19 @@
+1.0 initial release [Arei]:
+- General code
+    - Fixed the PHP data manipulating code
+    - Better definition/separation of Hercules/FluCP permissions and LCMS permissions
+- Improved performances
+    - Joined tables to avoid extra queries to retrieve parent data
+- Improved interface
+    - No row delete button if the item cannot be deleted due to child records
+    - Added a validate button when page.status = pending
+    - Multiple selection for deletion/validation
+- Added cleanURL support
+- Added a (currently) quick&dirty way to manually hook a LCMS page to a FluxCP page
+  (This will be improved in the next version)
+- Fixed a shitload of bugs I'm too lazy to enumerate
+
+
+1.0b [Arei]:
+- Awful test internal release
+- Bugs

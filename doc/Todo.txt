@@ -1,36 +1,32 @@
-Current 1.0b
+Current: 1.0b
 
 
-1.0 initial release :
-- Fix the query clusterfuck
-- Fix the permissions clusterfuck
-- Improve performances
-    - Reduce/improve sql queries if possible without too much hassle
-- Improve general code
-    - MVC pattern
-    - Consistency 
-- Make the installation process easier (ideally, only 1 edit in FluxCP/Flux/Template.php)
-- Improve form content validation and feedback in a more user-friendly way
-- Improve interface
-    - No delete button if item cannot be deleted
-- Add cleanURL support
+1.0 initial release:
 - Write a better Readme
-- Handle installation errors & messages
+- Re-test the addon thoroughly
 
 
-1.1 release :
+1.1 release:
+- Implement configurable WYSIWYG/HTMLParser libraries
+- Code better, more understandable methods to handle data
 - Add more options
     - Choose modules/FluxCP-menus priority in FluxCP menu
     - Choose pages priority in the module
 - Handle menus and pages more efficiently
     - Add a news/events systems if not possible to handle them directly within LCMS configuration
+    - Add a "type" column to module table and make 2 types of modules
+        - 1 : Menu container   => For automatic pages hooking on the left menu
+        - 2 : Hidden container => For specific pages included manually (I.e. News/Events)
+    - Add a proper way to hook a given page in another page :
 - Improve interface general comfort
-    - Multiple selection for deletion/validation
     - Search dropdown box for selects with a lot of content
     - Add icons
     - Etc
+    - Improve form content validation and feedback in a more user-friendly way
+- Add extended cleanURL suppport
+    I.e : FluxCP/lcms/show/My Page/
 
 
-1.2 release :
+1.2 release:
 - Add custom code snippets to retrieve data from Hercules/FluxCP and display it within content
 - ...

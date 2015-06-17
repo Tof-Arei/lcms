@@ -1,11 +1,13 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <?php if (!empty($errorMessage)): ?>
     <p class="red"><?php echo nl2br($errorMessage) ?></p>
-    <?php exit; ?>
 <?php endif; ?>
 <?php if (!empty($resultMessage)): ?>
     <p class="green"><?php echo nl2br($resultMessage) ?></p>
-    <?php printf(Flux::message('LogoutInfo2'), $metaRefresh['location']) ?>
+    <?php //printf(Flux::message('LogoutInfo2'), $metaRefresh['location']) ?>
+<?php endif; ?>
+<?php if (!empty($resultMessage) || !empty($errorMessage)): ?>
+    <a href="<?php echo $this->url('lcms', 'index') ?>"><?php echo Flux::message('LcmsMesBackToIndex') ?></a>
     <?php exit; ?>
 <?php endif; ?>
     

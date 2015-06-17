@@ -1,13 +1,7 @@
-Light CMS by Arei
-
-Version : 1.0b
-
-Changelog :
-1.0b [Arei]:
-- Beta release
+Light CMS V1.0b by Arei
 
 
-Thanks to/Credits :
+Credits/Thanks to :
 - The FluxCP developers and contributors.
 - The Hercules developers and contributors.
 - Feefty for his invaluable help through his support addon.
@@ -88,51 +82,48 @@ How to uninstall :
 
 2. Execute FluxCP/addons/lcms/sql/uninstall.sql into your Hercules/FluxCP sql database
 
-3. Restore FluxCP files modified by installation steps 3, 4 and 5
+3. Restore FluxCP files modified by installation steps 3 and 4
 
 How to use :
 1. Install the addon. That will add the Light CMS management menu.
    The menu is accessible to every logged user, but they have to be given author rights before they can post content.
    
-   (Regarding security, authors who are not admins on the Hercules server can only access their own content and add new content.
-   Be careful, even though the addon is protected against code injection, you should only give author permissions to people you trust
+   (Regarding security: Be careful, even though the addon is protected against code injection, you should only give author permissions to people you trust
    because their content will appear on the website without confirmation.)
 
 2. Give yourself author permissions using the "Add Authors" submenu.
-3. Add content using the "Add [Content]" button.
+3. Add content using the "Add" button in the according menu.
     3.1 Adding a new module.
-        Modules are used to group pages and add them dynamically to the FluxCP menu
-        you need at least one if you want your content to appear on FluxCP.
+        Modules are used to group pages and insert them dynamically into the FluxCP menu
+        you need at least one module if you want to be able to create pages.
+        Note: An author can't create any page without an existing and accessible module.
 
+        The access dropdown box is used to the the module using permissions for authors, it uses LCMS permissions.
         The name field will be displayed in the FluxCP menu as a category
 
     3.2 Adding a new page
         Pages are embedded inside modules and are used to display content.
         You must always link a page to an existing module.
 
-        Select "Page" from the "Type" dropdown box when adding new content to
-        add a new page.
-        The access dropdown box is used to set the page viewing permissions. The valuee are
-        the values used by FluxCP.
+        The access dropdown box is used to set the page viewing permissions, it uses Hercules/FluxCP permissions
+        
+        3.2.1 Hooking a LCMS page to a FluxCP page manually (Backing up the original files is strongly recommended)
+              Open the desired page from FluxCP/themes/<your theme>/ directory and replace the content with the following code :
+
+              <?php
+              if (!defined('FLUX_ROOT')) exit;
+
+              $page_id = 1; // id of the existing page to hook
+              $lcms = new Lcms_Functions($session);
+              echo $lcms->hookPage($page_id);
+              ?>
 
 4. Edit/delete content
-    4.1 Editing/deleting content (as an author)
-        Users can edit and delete their own content using the corresponding buttons
-        in the "My content" menu.
-
-    4.2 Editing/deleting content (as an admin)
-        Only admins (from a Hercules/FluxCP point of view) can see and edit all
-        the LCMS content.
-        They can do so by using the corresponding buttons in the "Manage content" menu.
+   Use the according buttons in the according menus.
 
 5. Managing authors
-    5.1 Adding new authors
-        Only admins can add authors.
-        They can do so by using the "Manage Content" menu.
-       
-    5.2 Editing/deleting authors
-        Only admins can edit authors.
-        They can do so by using the corresponding buttons in the "Manage content" menu.
+   Authors can be managed by using the "Manage authors" menu.
+
 
 6. Understanding the LCMS permission system
    The LCMS permission system is actually quite simple. When it comes to displaying content to users,
@@ -143,5 +134,3 @@ How to use :
    For example, an user who is a simple user on Hercules/FluxCP (group_id=0) can be an administrator on LCMS side (access=99).
    A LCMS admin can access, moderate and edit any content belonging to users with a lower level of permission.
    i.e : A high-gm on LCMS (access=2) will be able to manage his own content and users below his level content (0=normal and 1=low-gm).
-   Note: Only an administrator on Hercules/FluxCP side will be able to manage LCMS "admins" and their content.
-   So basically, every author is also a moderator starting from low-gm (access=1).
