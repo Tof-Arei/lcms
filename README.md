@@ -1,14 +1,8 @@
 # FluxCP-LCMS
-Light Content Management System for Hercules FluxCP by Arei
-
-Version : 1.0b
-
-Changelog :
-1.0b [Arei]:
-- Beta release
+Light Content Management System for Hercules FluxCP V1.0b by Arei
 
 
-Thanks to/Credits :
+Credits/Thanks to :
 - The FluxCP developers and contributors.
 - The Hercules developers and contributors.
 - Feefty for his invaluable help through his support addon.
