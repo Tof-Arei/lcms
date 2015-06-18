@@ -38,25 +38,29 @@ return array(
                 'login'         => 'login'
 	),
     
+        // Values for data validation, default values etc
+        // Template: 'table' => array(
+        //                  'field' => array(type, length, null/not null, default value)
+        // )
         'LcmsValues'         =>  array(
                 'author' => array(
-                        'account_id'      => array('int', '11', 'not null', ''),
-                        'userid'          => array('string', '255', '', 'ext'),
+                        'account_id'      => array('int', '11', 'not null', '0'),
+                        'userid'          => array('string', '255', 'null', ''),
                         'access'          => array('int', '2', 'not null', '0')
                 ),
                 'module' => array(
                         'id'              => array('int', '11', 'not null', '0'),
                         'account_id'      => array('int', '11', 'not null', 'author()'),
-                        'userid'          => array('string', '255', '', 'ext'),
+                        'userid'          => array('string', '255', 'null', ''),
                         'access'          => array('int', '2', 'not null', '0'),
                         'name'            => array('string', '255', 'not null')
                 ),
                 'page'   => array(
                         'id'              => array('int', '11', 'not null', '0'),
-                        'module_id'       => array('int', '11',  'not null', ''),
-                        'module_name'     => array('string', '255', '', 'ext'),
+                        'module_id'       => array('int', '11',  'not null', '0'),
+                        'module_name'     => array('string', '255', 'null', ''),
                         'account_id'      => array('int', '11',  'not null', 'author()'),
-                        'userid'          => array('string', '255', '', 'ext'),
+                        'userid'          => array('string', '255', 'null', ''),
                         'status'          => array('int', '2',  'not null', '-1'),
                         'access'          => array('int', '2',  'not null', '0'),
                         'date'            => array('string', 'DateTime', 'not null', 'now()'),

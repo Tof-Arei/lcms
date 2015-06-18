@@ -51,6 +51,29 @@ class Lcms_Functions {
     }
     
     /*
+     * get Hercules account
+     * @param account_id
+     * @return Hercules account
+     */
+    public function getAccount($account_id, $access = null) {
+        $account_tbl = Flux::config('FluxTables.login');
+        $db = $this->server->loginDatabase;
+
+        $cols = "$db.$account_tbl.account_id, $db.$account_tbl.group_id, $db.$account_tbl.userid";
+        $bind = array($account_id);
+        $sqlpartial = "WHERE $db.$account_tbl.account_id = ?";
+        if (!is_null($access)){
+            $bind[] = $access;
+            $sqlpartial .= " AND $db.$account_tbl.access <= ?";
+        }
+        $sql = "SELECT $cols FROM $db.$account_tbl $sqlpartial";
+        $sth = $this->server->connection->getStatement($sql);
+        $sth->execute($bind);
+
+        return $sth->fetch();
+    }
+    
+    /*
      * get Hercules group name
      * @param Hercules group_id
      * @return Hercules group name
@@ -691,6 +714,10 @@ class Lcms_Functions {
  * DAO-like class to handle data and validation
  */
 class Lcms_DAO {
+    public static $TYPE_PAGE = "page";
+    public static $TYPE_MODULE = "module";
+    public static $TYPE_AUTHOR = "author";
+    
     private $object;
     private $post;
     private $type;
@@ -715,43 +742,26 @@ class Lcms_DAO {
      */
     private function populate() {
         if (!is_null($this->object)) {
-            foreach ($this->lcms_config->toArray() as $key => $value) {
-                $field_type = $this->lcms_config->get($key, false);
-                if ($field_type != null) {
-                    $prop = $this->object->__get($key);
-                    if (!is_null($prop)) {
-                        $this->$key = $prop;
-                        settype($this->$key, $field_type[0]);
-                    } else {
-                        $this->$key = null;
-                    }
-                }
-            }
+            $this->populateWObject();
         } else if (!is_null($this->post)) {
-            foreach ($this->lcms_config->toArray() as $key => $value) {
-                $field_type = $this->lcms_config->get($key, false);
-                if ($field_type != null) {
-                    if (array_key_exists($key, $this->post)) {
-                        $this->$key = $this->post[$key];
-                        settype($this->$key, $field_type[0]);
-                    } else {
-                        $this->$key = null;
-                    }
-                }
-            }
+            $this->populateWPOST();
+            $this->getAccountRef();
         } else {
-            foreach ($this->lcms_config->toArray() as $key => $field_type) {
-                if (count($field_type) > 3) {
-                    switch ($field_type[3]) {
-                        case "now()" :
-                            $this->$key = date('Y-m-d H:i:s');
-                            break;
-                        case "author()" :
-                            $this->$key = $this->session->account->account_id;
-                            break;
-                        default:
-                            $this->$key = $field_type[3];
-                    }
+            $this->populateWNew();
+        }
+    }
+    
+    /*
+     * Populate the DAO from an existing Flux_DataObject
+     */
+    private function populateWObject() {
+        foreach ($this->lcms_config->toArray() as $key => $value) {
+            $field_type = $this->lcms_config->get($key, false);
+            if ($field_type != null) {
+                $prop = $this->object->__get($key);
+                if (!is_null($prop)) {
+                    $this->$key = $prop;
+                    settype($this->$key, $field_type[0]);
                 } else {
                     $this->$key = null;
                 }
@@ -760,12 +770,60 @@ class Lcms_DAO {
     }
     
     /*
+     * Populate the DAO from a POST request
+     */
+    private function populateWPOST() {
+        foreach ($this->lcms_config->toArray() as $key => $value) {
+            $field_type = $this->lcms_config->get($key, false);
+            if ($field_type != null) {
+                if (array_key_exists($key, $this->post)) {
+                    $this->$key = $this->post[$key];
+                    settype($this->$key, $field_type[0]);
+                } else {
+                    $this->$key = null;
+                }
+            }
+        }
+    }
+    
+    /*
+     * Populate a new empty DAO with default values
+     */
+    private function populateWNew() {
+        foreach ($this->lcms_config->toArray() as $key => $field_type) {
+            if (count($field_type) > 3) {
+                switch ($field_type[3]) {
+                    case "now()" :
+                        $this->$key = date('Y-m-d H:i:s');
+                        break;
+                    case "author()" :
+                        $this->$key = $this->session->account->account_id;
+                        break;
+                    default:
+                        $this->$key = $field_type[3];
+                }
+            } else {
+                $this->$key = null;
+            }
+        }
+    }
+    
+    /*
+     * Populate external references of current data-object
+     * Hackity hack until 1.1 function.inc.php rewrite
+     */
+    private function getAccountRef() {
+        $ref_object = $this->lcms->getAccount($this->account_id);
+        $this->userid = $ref_object->userid;
+    }
+    
+    /*
      * validate the DAO according to the data-model in addon.php
      */
     public function validate() {
         $ret = array(
             'result'   => 'success',
-            'name'     => ($this->type == "author") ? $this->userid : $this->name,
+            'name'     => ($this->type == Lcms_DAO::$TYPE_AUTHOR) ? $this->userid : $this->name,
             'messages' => array()
         );
         
@@ -803,12 +861,12 @@ class Lcms_DAO {
                 break;
         }
         if (!is_null($field_type[1])) {
-            if ($field_type[1] == 'DateTime') {
-                if (!$this->isDateValid($value)) {
-                    $ret = false;
-                }
-            } else {
-                if (!is_null($value)) {
+            if (!is_null($value)) {
+                if ($field_type[1] == 'DateTime') {
+                    if (!$this->isDateValid($value)) {
+                        $ret = false;
+                    }
+                } else {
                     if (strlen($value) > (int) $field_type[1]) {
                         $ret = false;
                     }
@@ -816,10 +874,12 @@ class Lcms_DAO {
             }
         }
         if (!empty($field_type[2])) {
-            if (is_null($value)) {
-                $ret = false;
-            } else if ($field_type[0] == 'string' && empty($value)) {
-                $ret = false;
+            if ($field_type[2] == 'not null') {
+                if (is_null($value)) {
+                    $ret = false;
+                } else if ($field_type[0] == 'string' && empty($value)) {
+                    $ret = false;
+                }
             }
         }
         return $ret;
@@ -842,10 +902,10 @@ class Lcms_DAO {
         $module_res = null;
         $page_res = null;
         switch ($this->type) {
-            case "module" :
+            case Lcms_DAO::$TYPE_MODULE :
                 $page_res = $this->lcms->getModulePages($this);
                 break;
-            case "author" :
+            case Lcms_DAO::$TYPE_AUTHOR :
                 $page_res = $this->lcms->getAuthorPages($this);
                 $module_res = $this->lcms->getAuthorModules($this);
                 break;

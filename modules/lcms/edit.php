@@ -15,7 +15,7 @@ $group_id = $session->account->group_id;
 
 // Check action parameters and author existance (in case somebody "hacks" his way to the form pages)
 $errorMessage = "";
-if (!isset($param[2])) {
+if ($param[2] == '') {
     $errorMessage = sprintf(Flux::message('LcmsMesEEmpty'), ucfirst($type));
 }
 if (is_null($author)) {

@@ -2,6 +2,10 @@ Current: 1.0b
 
 
 1.0 initial release:
+- User [] successfully added error
++ Delete without selection error
+- Add a nickname field to the author table to prevent userid from being displayed if used
+    - Add a "Settings" page allowing an author to change his nickname
 - Write a better Readme
 - Re-test the addon thoroughly
 
